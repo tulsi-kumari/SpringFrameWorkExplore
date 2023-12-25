@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+		
+	<!-- creating independant class beans first -->	
+	<bean name="bref" class="com.springcore.ref.B" p:y="32"/>
+	
+	
+	<!-- injecting reference type using ref tag inside property tag-->	
+	<bean name="aref1" class="com.springcore.ref.A">
+		<property name="x" value="31"/>
+		<property name="ob">
+			<ref bean="bref"/>
+		</property>
+	</bean>
+	
+	<!-- injecting reference type as an attribute of property tag -->	
+	<bean name="aref2" class="com.springcore.ref.A" >
+		<property name="x" value="31"/>
+		<property name="ob" ref="bref"/>
+	</bean>
+	
+	<!-- injecting reference type using p schema -->	
+	<bean name="aref3" class="com.springcore.ref.A" p:x="31" p:ob-ref="bref"/>
+	
+	
+</beans>
